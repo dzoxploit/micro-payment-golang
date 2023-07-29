@@ -21,7 +21,7 @@ type TransactionService interface {
 
 type transactionService struct {
 	creditCardService creditcardservice.CreditCardService
-	historyService    transactionhistory.TransactionHistoryService // Correct type name here
+	historyService    transactionhistory.TransactionHistoryService
 }
 
 func NewTransactionService(creditCardService creditcardservice.CreditCardService, historyService transactionhistory.TransactionHistoryService) TransactionService {
