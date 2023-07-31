@@ -4,21 +4,20 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/dzoxploit/micro-payment-golang/creditcardservice" // Corrected import path
+	"github.com/dzoxploit/micro-payment-golang/transactions"
 	"github.com/gorilla/mux"
-	"github.com/dzoxploit/micro-payment-golang/creditcardservice"
-	"github.com/dzoxploit/micro-payment-golang/transaction"
-	"github.com/dzoxploit/micro-payment-golang/transactionhistory" // Corrected import path
 )
 
 func main() {
 	// Initialize services
 	creditCardService := creditcardservice.NewCreditCardService()
-	transactionHistoryService := transactionhistory.NewTransactionHistoryService()
+	transactionHistoryService := transactions.NewTransactionHistoryService()
 
 	// Initialize handlers
 	creditCardHandler := creditcardservice.NewCreditCardHandler(creditCardService)
-	transactionHandler := transaction.NewTransactionHandler(transaction.NewTransactionService(creditCardService, transactionHistoryService))
-	transactionHistoryHandler := transactionhistory.NewTransactionHistoryHandler(transactionHistoryService)
+	transactionHandler := transactions.NewTransactionHandler(transactions.NewTransactionService(creditCardService, transactionHistoryService))
+	transactionHistoryHandler := transactions.NewTransactionHistoryHandler(transactionHistoryService)
 
 	// Create a new router
 	router := mux.NewRouter()
@@ -33,5 +32,5 @@ func main() {
 	router.HandleFunc("/transactionhistory/save", transactionHistoryHandler.SaveTransactionHandler).Methods("POST")
 
 	// Start the server
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(":7000", router))
 }
