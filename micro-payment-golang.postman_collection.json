@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "740e8c42-150f-4f18-bc4a-7dc283b14815",
+		"name": "micro-payment-golang",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "check validate credit card",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"credit_card_number\": \"378282246310005\"}"
+				},
+				"url": {
+					"raw": "http://localhost:7000/creditcard/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"creditcard",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transaction process",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"total_amount\": 2000.00,\n  \"items\": [\n    {\"name\": \"Ayam Goreng\", \"price\": 1000.00},\n    {\"name\": \"Bakso Afung\", \"price\": 1000.00}\n  ],\n  \"credit_card\": \"378282246310005\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:7000/transaction/process",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"transaction",
+						"process"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transaction history",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n    \"transaction\": {\n    \"name\": \"Product A\",\n    \"price\": 1000\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:7000/transactionhistory/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7000",
+					"path": [
+						"transactionhistory",
+						"save"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

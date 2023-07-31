@@ -11,7 +11,7 @@ var DBConn *sql.DB
 
 func InitDB() error {
 	// Ganti "username", "password", "host", "port", dan "dbname" sesuai dengan konfigurasi MySQL Anda
-	dataSourceName := "username:password@tcp(127.0.0.1:330)/dbname"
+	dataSourceName := "root:@tcp(127.0.0.1:3306)/micropayment"
 	db, err := sql.Open("mysql", dataSourceName)
 	if err != nil {
 		return err
