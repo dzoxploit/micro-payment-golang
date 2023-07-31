@@ -5,6 +5,13 @@ import (
 	"net/http"
 )
 
+
+type APIResponse struct {
+	Status  string      `json:"status"`
+	Message string      `json:"message,omitempty"`
+	Data    interface{} `json:"data,omitempty"`
+}
+
 type TransactionHandler struct {
 	service TransactionsService
 }
@@ -55,5 +62,14 @@ func (h *TransactionHistoryHandler) SaveTransactionHandler(w http.ResponseWriter
 
 	h.service.SaveTransaction(request.Transactions)
 
+
+	apiResponse := APIResponse{
+		Status: "success",
+		Data:   request.Transactions, // You can customize the response data here if needed
+	}
+
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(apiResponse)
+
 }
